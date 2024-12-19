@@ -150,16 +150,14 @@ class LightCompressorPlugin : FlutterPlugin, MethodCallHandler,
             context = applicationContext,
             uris = listOf(Uri.fromFile(File(path))),
             isStreamable = false,
-            storageConfiguration = if (isSharedStorage) SharedStorageConfiguration(
+            storageConfiguration = SharedStorageConfiguration(
                 saveAt = when (saveAt) {
                     "Downloads" -> SaveLocation.downloads
                     "Pictures" -> SaveLocation.pictures
                     "Movies" -> SaveLocation.movies
                     else -> SaveLocation.movies
                 }
-            ) else SharedStorageConfiguration(),
-//            appSpecificStorageConfiguration = if (!isSharedStorage) AppSpecificStorageConfiguration(
-//            ) else null,
+            ) ,
             listener = object : CompressionListener {
                 override fun onProgress(index: Int, percent: Float) {
                     Handler(Looper.getMainLooper()).post {
