@@ -15,9 +15,6 @@ import com.abedelazizshe.lightcompressorlibrary.CompressionListener
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
 import com.abedelazizshe.lightcompressorlibrary.VideoQuality
 import com.abedelazizshe.lightcompressorlibrary.config.*
-import com.abedelazizshe.lightcompressorlibrary.config.SharedStorageConfiguration
-import com.abedelazizshe.lightcompressorlibrary.config.AppSpecificStorageConfiguration
-import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration
 import com.google.gson.Gson
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
