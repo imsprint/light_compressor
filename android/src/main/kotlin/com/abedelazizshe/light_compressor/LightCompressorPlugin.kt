@@ -16,6 +16,8 @@ import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
 import com.abedelazizshe.lightcompressorlibrary.VideoQuality
 import com.abedelazizshe.lightcompressorlibrary.config.*
 import com.abedelazizshe.lightcompressorlibrary.config.SharedStorageConfiguration
+import com.abedelazizshe.lightcompressorlibrary.config.AppSpecificStorageConfiguration
+import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration
 import com.google.gson.Gson
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -150,14 +152,16 @@ class LightCompressorPlugin : FlutterPlugin, MethodCallHandler,
             context = applicationContext,
             uris = listOf(Uri.fromFile(File(path))),
             isStreamable = false,
-            storageConfiguration = SharedStorageConfiguration(
+            sharedStorageConfiguration = if (isSharedStorage) SharedStorageConfiguration(
                 saveAt = when (saveAt) {
                     "Downloads" -> SaveLocation.downloads
                     "Pictures" -> SaveLocation.pictures
                     "Movies" -> SaveLocation.movies
                     else -> SaveLocation.movies
                 }
-            ) ,
+            ) else null,
+            appSpecificStorageConfiguration = if (!isSharedStorage) AppSpecificStorageConfiguration()
+            else null,
             listener = object : CompressionListener {
                 override fun onProgress(index: Int, percent: Float) {
                     Handler(Looper.getMainLooper()).post {
@@ -344,3 +348,4 @@ class LightCompressorPlugin : FlutterPlugin, MethodCallHandler,
 
     override fun onDetachedFromActivity() {}
 }
+
